@@ -8,7 +8,7 @@ My public Docker images that i use for development enviorment.
 
 > All PHP images are based on [php:7.4.13-fpm-alpine3.12](https://github.com/docker-library/php/blob/0274f58b8dcf68a23d8fd77101d2d4c74d38fc65/7.4/alpine3.12/fpm/Dockerfile)
 ## docker-compose
-There's an example of docker-compose that I use for php development (mostly with [lumen](https://lumen.laravel.com/) or [laravel](http://laravel.com/)) in [here](https://github.com/ahbanavi/Dockerfiles/PHP/docker-compose.yml).  
+There's an example of docker-compose that I use for php development (mostly with [lumen](https://lumen.laravel.com/) or [laravel](http://laravel.com/)) in [here](https://github.com/ahbanavi/Dockerfiles/blob/main/PHP/docker-compose.yml).  
 
 ## Contact Me
 Feel free to drop any question in [Issues](https://github.com/ahbanavi/Dockerfiles/issues) or my [Email Address](mailto:ahbanavi@gmail.com).  
