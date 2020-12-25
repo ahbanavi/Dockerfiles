@@ -14,4 +14,4 @@ There's an example of docker-compose that I use for php development (mostly with
 Feel free to drop any question in [Issues](https://github.com/ahbanavi/Dockerfiles/issues) or my [Email Address](mailto:ahbanavi@gmail.com).  
 
 ## License
-This project is licensed under the MIT License - see the [LICENSE](https://github.com/ahbanavi/Dockerfiles/LICENSE) file for details.
+This project is licensed under the MIT License - see the [LICENSE](https://github.com/ahbanavi/Dockerfiles/blob/main/LICENSE) file for details.
