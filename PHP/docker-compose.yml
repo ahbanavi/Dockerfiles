@@ -1,0 +1,71 @@
+version: "3.8"
+
+services:
+  app:
+    container_name: app
+    image: ahbanavi/php:pdo # or ahbanavi/php:pdo-redis
+    restart: unless-stopped
+    volumes:
+      - ./:/var/www/html
+      - ./resources/php/local.ini:/usr/local/etc/php/conf.d/local.ini
+    depends_on:
+      redis:
+        condition: service_started
+  webserver:
+    container_name: webserver
+    image: nginx:1.18.0-alpine
+    restart: unless-stopped
+    ports:
+      - '80:80'
+    volumes:
+      - ./:/var/www/html
+      - ./resources/nginx/conf.d/:/etc/nginx/conf.d/
+    depends_on:
+      app:
+        condition: service_started
+  redis:
+    container_name: redis
+    image: redis:alpine
+    restart: unless-stopped
+    ports:
+      - '6379:6379'
+    volumes:
+      - vol_redis:/data
+  redisInsight:
+    container_name: redisInsight
+    image: redislabs/redisinsight
+    restart: unless-stopped
+    ports:
+      - 8001:8001
+    volumes:
+      - vol_redisinsight:/db
+    depends_on:
+      redis:
+        condition: service_started
+  mariadb:
+    container_name: db
+    image: mariadb:10.5.8-focal
+    restart: unless-stopped
+    ports:
+    - 3306:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: ROOTPASSWORD
+      MYSQL_USER: USERNAME
+      MYSQL_PASSWORD: USERPASSWORD
+      MYSQL_DATABASE: DBNAME
+    volumes:
+#      - ./resources/database/:/docker-entrypoint-initdb.d/  # for dump sql file in new database
+      - vol_mariadb:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", 'mysqladmin', 'ping', '-pROOTPASSWORD' ]
+      interval: 5s
+      timeout: 20s
+      retries: 20
+
+volumes:
+  vol_redis:
+    driver: local
+  vol_redisinsight:
+    driver: local
+  vol_mariadb:
+    driver: local
