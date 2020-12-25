@@ -16,7 +16,7 @@ services:
     image: nginx:1.18.0-alpine
     restart: unless-stopped
     ports:
-      - '80:80'
+      - 80:80
     volumes:
       - ./:/var/www/html
       - ./resources/nginx/conf.d/:/etc/nginx/conf.d/
@@ -28,7 +28,7 @@ services:
     image: redis:alpine
     restart: unless-stopped
     ports:
-      - '6379:6379'
+      - 6379:6379
     volumes:
       - vol_redis:/data
   redisInsight:
