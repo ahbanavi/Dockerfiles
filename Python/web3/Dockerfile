@@ -12,6 +12,9 @@ RUN pip install --no-cache-dir cython==0.29.24
 RUN pip install --no-cache-dir web3
 RUN pip install --no-cache-dir py-solc-x
 RUN pip install --no-cache-dir python-dotenv
+RUN pip install --no-cache-dir pipx
+RUN pipx ensurepath
+RUN pipx install eth-brownie
 
 RUN bash -c 'echo -e "import solcx\nsolcx.install_solc(\"0.8.9\")" | python'
 # uncomment for installing all solc versions:
