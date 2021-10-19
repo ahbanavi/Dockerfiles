@@ -20,6 +20,10 @@ RUN python
 
 FROM python:3.10-slim-buster
 
+## install some dev tools
+RUN apt update && apt upgrade &&  apt install -y zsh curl git
+RUN sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+
 COPY --from=builder /root/.solcx /root/.solcx
 
 ## Activate virtualenv
