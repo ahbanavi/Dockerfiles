@@ -1,4 +1,4 @@
-name: Docker Image CI
+name: Docker Image CI - Web3
 
 on:
   push:
@@ -23,3 +23,6 @@ jobs:
         docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
     - name: Build the Docker image
       run: docker build . --file Python/web3/Dockerfile --tag ahbanavi/web3_py_tools:latest
+      
+    - name: Docker Push
+      run: docker push ahbanavi/web3_py_tools:latest
