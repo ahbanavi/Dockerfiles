@@ -12,8 +12,7 @@ RUN pip install --no-cache-dir cython==0.29.24
 RUN pip install --no-cache-dir web3
 RUN pip install --no-cache-dir py-solc-x
 RUN pip install --no-cache-dir python-dotenv
-RUN pip install --no-cache-dir pipx
-RUN pipx ensurepath
+RUN python3 -m pip install --user pipx
 RUN pipx install eth-brownie
 
 RUN bash -c 'echo -e "import solcx\nsolcx.install_solc(\"0.8.9\")" | python'
@@ -31,6 +30,9 @@ COPY --from=builder /root/.solcx /root/.solcx
 ## Activate virtualenv
 COPY --from=builder /opt/venv /opt/venv
 ENV PATH="/opt/venv/bin:$PATH"
+
+RUN python3 -m pipx ensurepath
+RUN python3 -m pipx completions
 
 WORKDIR /code
 CMD bash
