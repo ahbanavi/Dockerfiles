@@ -1,4 +1,4 @@
-FROM python:3.10 as builder
+FROM python:3.9 as builder
 
 ## Virtualenv
 ENV VIRTUAL_ENV=/opt/venv
@@ -18,7 +18,7 @@ RUN bash -c 'echo -e "import solcx\nsolcx.install_solc(\"0.8.9\")" | python'
 # uncomment for installing all solc versions:
 # RUN bash -c 'echo -e "import solcx\nfor x in solcx.get_installable_solc_versions(): solcx.install_solc(x,True)" | python'
 
-FROM python:3.10-slim-buster
+FROM python:3.9-slim-buster
 
 ## install some dev tools
 RUN apt update && apt upgrade && apt install -y zsh curl git nodejs npm
