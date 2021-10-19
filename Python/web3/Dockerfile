@@ -1,5 +1,8 @@
 FROM python:3.10 as builder
 
+RUN pip install --user pipx
+RUN pipx install eth-brownie
+
 ## Virtualenv
 ENV VIRTUAL_ENV=/opt/venv
 RUN python3 -m venv $VIRTUAL_ENV
@@ -12,8 +15,6 @@ RUN pip install --no-cache-dir cython==0.29.24
 RUN pip install --no-cache-dir web3
 RUN pip install --no-cache-dir py-solc-x
 RUN pip install --no-cache-dir python-dotenv
-RUN python3 -m pip install --user pipx
-RUN pipx install eth-brownie
 
 RUN bash -c 'echo -e "import solcx\nsolcx.install_solc(\"0.8.9\")" | python'
 # uncomment for installing all solc versions:
@@ -27,12 +28,13 @@ RUN sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/inst
 
 COPY --from=builder /root/.solcx /root/.solcx
 
+RUN pipx ensurepath
+RUN pipx completions
+
 ## Activate virtualenv
 COPY --from=builder /opt/venv /opt/venv
 ENV PATH="/opt/venv/bin:$PATH"
 
-RUN python3 -m pipx ensurepath
-RUN python3 -m pipx completions
 
 WORKDIR /code
 CMD bash
