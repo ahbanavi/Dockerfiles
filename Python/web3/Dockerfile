@@ -25,8 +25,6 @@ RUN apt-get update && apt-get install -y \
     && sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" \
     && npm install -g ganache-cli \
     && apt-get purge -y npm git curl \
-    && apt-get -y autoremove \
-    && apt-get -y autoclean \
     && rm -rf /var/lib/apt/lists/* 
 
 COPY --from=builder /root/.solcx /root/.solcx

@@ -1,5 +1,2 @@
 cython==0.29.24
-web3
-py-solc-x
-python-dotenv
 eth-brownie
