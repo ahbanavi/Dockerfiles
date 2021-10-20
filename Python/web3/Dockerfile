@@ -22,6 +22,7 @@ RUN apt-get update && apt-get install -y \
     git \
     nodejs \
     npm \
+    tk \
     && sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" \
     && npm install -g ganache-cli \
     && apt-get purge -y npm git curl \
