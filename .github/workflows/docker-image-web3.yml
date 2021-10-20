@@ -5,6 +5,7 @@ on:
     branches: [ main ]
     paths:
     - 'Python/web3/Dockerfile'
+    - 'Python/web3/requirements.txt'
 
 
 jobs:
