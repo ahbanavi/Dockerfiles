@@ -1,0 +1,40 @@
+name: Docker Image CI - Node-rsync
+
+on:
+  push:
+    branches: 
+      - main
+    paths:
+      - 'Node/rsync/Dockerfile'
+
+
+jobs:
+
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      -
+        name: Checkout
+        uses: actions/checkout@v2
+      -
+        name: Set up QEMU
+        uses: docker/setup-qemu-action@v1
+      -
+        name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+      -
+        name: Login to DockerHub
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKER_USER }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+
+      -
+        name: Build and push
+        uses: docker/build-push-action@v2
+        with:
+          context: Node/rsync/
+          push: true
+          tags: ahbanavi/node:rsync
+          cache-from: type=registry,ref=ahbanavi/node:rsync
+          cache-to: type=inline
