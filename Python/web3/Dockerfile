@@ -1,4 +1,4 @@
-FROM python:3.9 as builder
+FROM python:3.10-bullseye as builder
 
 ## Virtualenv
 RUN python -m venv /opt/venv
@@ -9,11 +9,11 @@ COPY requirements.txt .
 RUN pip install --no-cache-dir --upgrade pip && \
     pip install --no-cache-dir -r requirements.txt
 
-RUN bash -c 'echo -e "import solcx\nsolcx.install_solc(\"0.8.9\")" | python'
+RUN bash -c 'echo -e "import solcx\nsolcx.install_solc(\"0.8.11\")" | python'
 # uncomment for installing all solc versions:
 # RUN bash -c 'echo -e "import solcx\nfor x in solcx.get_installable_solc_versions(): solcx.install_solc(x,True)" | python'
 
-FROM python:3.9-slim-buster
+FROM python:3.10-slim-bullseye
 
 ## install some dev tools
 RUN apt-get update && apt-get install -y \ 
